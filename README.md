@@ -178,6 +178,10 @@ The tests can be run using:
 python -m unittest
 ```
 
-## Caveat
-We attempted to use `st.cache_data` to perform the cache operation, but unfortunately, it didn't work as expected.
-As a last resort, we utilized `st.cache_resource` to resolve the cache issue.
+## Special Notes
+* We attempted to use `st.cache_data` to perform the cache operation, but unfortunately, it didn't work as expected.
+  As a last resort, we utilized `st.cache_resource` to resolve the cache issue.
+* Use cache with caution. For `READ` operations, everything should work smoothly. However, for `CREATE`, `UPDATE`,
+  or `DELETE` operations, consider setting a low cache value to avoid unexpected outcomes. Keep in mind that
+  caching is only applicable to read operations and will not be activated for `CREATE`, `UPDATE`, or `DELETE`
+  operations, even if you set up the TTL value.
