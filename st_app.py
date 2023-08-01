@@ -53,7 +53,6 @@ def main():
 
     query_tab, exec_tab, benchmark_tab = st.tabs(['Query Form',
                                                   'Exec Form',
-
                                                   'Performance Benchmarks'])
 
     with query_tab:
@@ -84,10 +83,15 @@ def main():
                              FILTER .title = <str>$title
                              SET {title := 'John Wick 5'})))\nSELECT movie {title};''')
 
+                st.code(
+                    '''SELECT (UPDATE Movie FILTER .title = <str>$title SET {title := 'John Wick 5'}) {title};''')
+
             with delete_snip_tab:
                 st.code('''WITH movie := (SELECT assert_single(
                             (DELETE Movie
                              FILTER .title = <str>$title)))\nSELECT movie {title};''')
+                st.code(
+                    '''SELECT (DELETE Movie FILTER .title = <str>$title) {title};''')
 
             qry = st.text_area(
                 'EdgeDB Query', placeholder='Example: \nSELECT Movie {title};')
