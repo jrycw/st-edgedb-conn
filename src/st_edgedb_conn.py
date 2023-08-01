@@ -55,13 +55,20 @@ class EdgeDBConnection(ExperimentalBaseConnection[EdgeDBClient], AbstractContext
     def client(self) -> EdgeDBClient:
         return self._instance
 
-    def query(self, qry,
+    def query(self,
+              qry: str,
               *args,
-              ttl=None,
-              jsonify=False,
-              required_single=None,
+              ttl: int | None = None,
+              jsonify: bool = False,
+              required_single: bool | None = None,
               **kwargs) -> str | EdgeDBObject:
         func_name = match_func_name(jsonify, required_single)
+        mutated_kws = ('insert', 'update', 'delete')
+        is_mutated = any(True
+                         for mutated_kw in mutated_kws
+                         if mutated_kw in qry.casefold())
+        if is_mutated:
+            ttl = 0
 
         @st.cache_resource(ttl=ttl, show_spinner='Executing your query...')
         def _query(func_name, qry, *args, **kwargs):

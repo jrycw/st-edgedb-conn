@@ -58,8 +58,8 @@ def main():
 
     with query_tab:
         with st.form('query-form'):
-            with st.expander('Corresponding EdgeDB function call by referring to'
-                             ' `jsonify` & `required_single`'):
+            with st.expander('''Find the corresponding EdgeDB function call by referring
+                              to `jsonify` & `required_single`'''):
                 df = pd.DataFrame(param_fun_relations, columns=[
                     'jsonify', 'required_single', 'EdgeDB function call'])
                 st.dataframe(df, hide_index=True)
@@ -117,19 +117,19 @@ def main():
                                                (None, False, True),
                                                index=0,
                                                format_func=required_single_format_func,
-                                               help='Check upper table if you would' +
-                                               'like to know which EdgeDB function is' +
-                                               'being called.')
+                                               help='Refer to the table above to ' +
+                                               'identify the corresponding EdgeDB ' +
+                                               'function being called.')
 
                 with ttl_jsonify_col:
-                    ttl = st.slider('ttl (secs)',
+                    ttl = st.slider('ttl (secs), for `READ` operation only',
                                     min_value=-1,
                                     max_value=60,
                                     value=-1,
                                     step=1,
                                     help='ttl=-1 indicates that the cache will never ' +
                                     'expire (default behavior).\n\n' +
-                                    'ttl=0 means there is no cache at all.')
+                                    'ttl=0 means there is no cache at all.\n\n')
                     ttl = ttl if ttl >= 0 else None
 
                     jsonify = st.checkbox('Jsonify',
@@ -137,11 +137,13 @@ def main():
                                           help='jsonify provides better visibility')
 
             with st.expander('Use cache with caution.'):
-                st.write('''If you are only using this app to `read` data, then 
-                         everything should be fine. However, if you are making changes 
-                         to the database through `create`, `update`, or `delete` 
-                         operations, you may want to consider setting a low cache 
-                         value. Otherwise, the outcome might not be as you expected.''')
+                st.write('''For `READ` operations, everything should work smoothly.
+                            However, for `CREATE`, `UPDATE`, or `DELETE` operations, 
+                            consider setting a low cache value to avoid unexpected 
+                            outcomes. Keep in mind that caching is only applicable 
+                            to read operations and will not be activated for `CREATE`, 
+                            `UPDATE`, or `DELETE` operations, even if you set up the 
+                            TTL value.''')
 
             *_, qry_last_col = st.columns(7)
             with qry_last_col:
@@ -188,7 +190,8 @@ def main():
     with exec_tab:
         with st.form('exec-form'):
             st.warning(
-                'Exec From taks no arguments and will not get the results of query')
+                '''The Exec Form does not accept any arguments and will not retrieve the
+                   results of the query.''')
             qry_exec = st.text_area(
                 'EdgeDB Execute',
                 placeholder='Example: \nINSERT Movie {title := "John Wick 5"};')
