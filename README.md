@@ -1,11 +1,11 @@
-# _st_edgedb_conn
+# st-edgedb-conn
 This repo showcases my work for [streamlit hackathon](https://discuss.streamlit.io/t/connections-hackathon/47574).
 
 The goal of this repo is to quickly build a connection by extending the built-in `ExperimentalBaseConnection` to execute queries easily on [EdgeDB](https://www.edgedb.com/).
 
 As EdgeDB maintains the official [edgedb-python](https://github.com/edgedb/edgedb-python) client library, our objective is to create the `EdgeDBConnection` class by wrapping the client while adhering to the interface of `ExperimentalBaseConnection`.
 
-
+The [live demo app](https://st-edgedb-conn.streamlit.app/) is hosted on Streamlit Cloud.
 ## Basic Concept of EdgeDBConnection 
 `edgedb-python` offers 6 types of [query function](https://www.edgedb.com/docs/clients/python/api/blocking_client):
 * `client.query`
