@@ -72,6 +72,7 @@ class EdgeDBConnection(ExperimentalBaseConnection[EdgeDBClient], AbstractContext
 
         @st.cache_resource(ttl=ttl, show_spinner='Executing your query...')
         def _query(func_name, qry, *args, **kwargs):
+            # print(f'_query called, {ttl=}') # For DEBUG
             return getattr(self.client, func_name)(qry, *args, **kwargs)
 
         return _query(func_name, qry, *args, **kwargs)
