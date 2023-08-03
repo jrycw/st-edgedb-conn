@@ -46,7 +46,7 @@ Users can simply write:
         tx.query('SELECT {1, 2, 3}')
 ```
 ### Limitation
-For transaction operations, it seems there is no quick way to inject a custom query function inside it. The object we get from looping through `client.transaction` (`Retry` instance) uses `__slots__`, which prevents us from monkey-patching it. After observing the source code, we found that the transaction method relies on `Retry`, and `Retry.__next__` relies on Iteration. Implementing a custom query function, we would need to carefully rewrite these two classes. The workload for this task does not seem trivial, so we have decided not to focus on this part but to put more effort into coordinating `EdgeDBConnection` with a Streamlit app.
+For transaction operations, it seems there is no quick way to inject a custom query function inside it. The object we get from looping through `client.transaction` (`Retry` instance) uses `__slots__`, which prevents us from monkey-patching it. After observing the source code, we found that the transaction method relies on `Retry`, and `Retry.__next__` relies on `Iteration`. Implementing a custom query function, we would need to carefully rewrite these two classes. The workload for this task does not seem trivial, so we have decided not to focus on this part but to put more effort into coordinating `EdgeDBConnection` with a Streamlit app.
 
 ## Installation
 ### 1. Clone this repo
