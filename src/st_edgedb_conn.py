@@ -64,15 +64,14 @@ class EdgeDBConnection(AbstractContextManager, ExperimentalBaseConnection[EdgeDB
               **kwargs) -> str | EdgeDBObject:
         func_name = match_func_name(jsonify, required_single)
         mutated_kws = ('insert', 'update', 'delete')
-        is_mutated = any(True
-                         for mutated_kw in mutated_kws
-                         if mutated_kw in qry.casefold())
+        is_mutated = any(mutated_kw in qry.casefold()
+                         for mutated_kw in mutated_kws)
         if is_mutated:
             ttl = 0
 
         @st.cache_resource(ttl=ttl, show_spinner='Executing your query...')
         def _query(func_name, qry, *args, **kwargs):
-            # print(f'_query called, {ttl=}') # For DEBUG
+            # print(f'_query called, {ttl=}')  # For DEBUG
             return getattr(self.client, func_name)(qry, *args, **kwargs)
 
         return _query(func_name, qry, *args, **kwargs)
