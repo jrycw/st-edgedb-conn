@@ -141,13 +141,15 @@ def main():
                                           help='jsonify provides better visibility')
 
             with st.expander('Use cache with caution.'):
-                st.write('''For `READ` operations, everything should work smoothly.
-                            However, for `CREATE`, `UPDATE`, or `DELETE` operations, 
-                            consider setting a low cache value to avoid unexpected 
-                            outcomes. Keep in mind that caching is only applicable 
-                            to read operations and will not be activated for `CREATE`, 
-                            `UPDATE`, or `DELETE` operations, even if you set up the 
-                            TTL value.''')
+                st.write('''For READ operations, everything should work smoothly. 
+                            However, it should be noted that the database could 
+                            possibly perform `CREATE`, `UPDATE`, or `DELETE` 
+                            operations by other connections or drivers. Under these
+                            circumstances, consider setting a low cache value to avoid
+                            unexpected outcomes. Also, please keep in mind that in our 
+                            app, caching is only applicable to read operations and will
+                            not be activated for `CREATE`, `UPDATE`, or `DELETE` 
+                            operations, even if you set up the `ttl` value.''')
 
             *_, qry_last_col = st.columns(7)
             with qry_last_col:
