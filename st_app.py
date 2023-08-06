@@ -141,7 +141,7 @@ def main():
                                           help='jsonify provides better visibility')
 
             with st.expander('Use cache with caution.'):
-                st.write('''For READ operations, everything should work smoothly. 
+                st.write('''For `READ` operations, everything should work smoothly. 
                             However, it should be noted that the database could 
                             possibly perform `CREATE`, `UPDATE`, or `DELETE` 
                             operations by other connections or drivers. Under these
