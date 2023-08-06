@@ -182,7 +182,7 @@ python -m unittest
 * We attempted to use `st.cache_data` to perform the cache operation, but unfortunately, it didn't work as expected.
   As a last resort, we utilized `st.cache_resource` to resolve the cache issue.
 * For `READ` operations, everything should work smoothly. However, it should be noted that the database could possibly
-  perform `CREATE`, `UPDATE`, or `DELETE` operations by other connections or drivers. Under these circumstances,
-  consider setting a low cache value to avoid unexpected outcomes. Also, please keep in mind that in our app,
-  caching is only applicable to read operations and will not be activated for `CREATE`, `UPDATE`, or `DELETE`
+  perform `CREATE`, `UPDATE`, or `DELETE` operations by other connections or drivers simultaneously. Under these 
+  circumstances, consider setting a low cache value to avoid unexpected outcomes. Also, please keep in mind that in 
+  our app, caching is only applicable to read operations and will not be activated for `CREATE`, `UPDATE`, or `DELETE`
   operations, even if you set up the `ttl` value.

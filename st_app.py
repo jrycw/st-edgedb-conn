@@ -144,12 +144,13 @@ def main():
                 st.write('''For `READ` operations, everything should work smoothly. 
                             However, it should be noted that the database could 
                             possibly perform `CREATE`, `UPDATE`, or `DELETE` 
-                            operations by other connections or drivers. Under these
-                            circumstances, consider setting a low cache value to avoid
-                            unexpected outcomes. Also, please keep in mind that in our 
-                            app, caching is only applicable to read operations and will
-                            not be activated for `CREATE`, `UPDATE`, or `DELETE` 
-                            operations, even if you set up the `ttl` value.''')
+                            operations by other connections or drivers simultaneously. 
+                            Under these circumstances, consider setting a low cache 
+                            value to avoid unexpected outcomes. Also, please keep in 
+                            mind that in our app, caching is only applicable to `READ`
+                            operations and will not be activated for `CREATE`, 
+                            `UPDATE`, or `DELETE` operations, even if you set up the
+                            `ttl` value.''')
 
             *_, qry_last_col = st.columns(7)
             with qry_last_col:
