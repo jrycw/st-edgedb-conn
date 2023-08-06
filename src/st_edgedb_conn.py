@@ -33,7 +33,7 @@ def match_func_name(jsonify=False, required_single=None):
     return func_name
 
 
-class EdgeDBConnection(ExperimentalBaseConnection[EdgeDBClient], AbstractContextManager):
+class EdgeDBConnection(AbstractContextManager, ExperimentalBaseConnection[EdgeDBClient]):
     _ENV_EDGEDB_DSN = 'EDGEDB_DSN'
 
     def __init__(self, connection_name: str = "edgedb_conn", **kwargs) -> None:
