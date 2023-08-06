@@ -178,7 +178,7 @@ The tests can be run using:
 python -m unittest
 ```
 
-## Special Notes
+## Notes
 * We attempted to use `st.cache_data` to perform the cache operation, but unfortunately, it didn't work as expected.
   As a last resort, we utilized `st.cache_resource` to resolve the cache issue.
 * For `READ` operations, everything should work smoothly. However, it should be noted that the database could possibly
